@@ -7,5 +7,5 @@ import org.hibernate.validator.constraints.NotEmpty
 class RestWSConfig() : Configuration() {
     @JsonProperty
     @NotEmpty
-    val appName: String = "appName"
+    val appName: String = "Example rest Appcliation"
 }
