@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
 
 class RestWSApp : Application<RestWSConfig>() {
     override fun run(configuration: RestWSConfig, environment: Environment) {
-        println("Running ${configuration.name}!")
+        println("Running ${configuration.appName}!")
         val calculatorComponent = CalculatorComponent()
         environment.jersey().register(calculatorComponent)
     }

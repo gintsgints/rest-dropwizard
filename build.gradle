@@ -30,5 +30,5 @@ compileTestKotlin {
 }
 
 run {
-    args = ['server', 'config/local.yaml']
+    args = ['server']
 }
