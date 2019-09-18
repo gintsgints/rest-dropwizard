@@ -1,4 +1,4 @@
-name: Kotlin REST WS example
+appName: Kotlin REST WS example
 
 server:
   applicationConnectors:

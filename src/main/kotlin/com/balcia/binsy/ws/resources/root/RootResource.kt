@@ -1,4 +1,4 @@
-package com.balcia.binsy.ws
+package com.balcia.binsy.ws.resources.root
 
 import com.codahale.metrics.annotation.Timed
 import com.google.common.collect.ImmutableMap

@@ -9,17 +9,21 @@ version '1.0-SNAPSHOT'
 ext.dropwizard_version = '1.3.14'
 
 apply plugin: 'application'
-mainClassName = "com.balcia.binsy.ws.MainAppKt"
+mainClassName = "com.balcia.binsy.ws.RestWSApp"
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://repo.balcia.com:8443/repository/maven-public/"
+    }
 }
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile "io.dropwizard:dropwizard-core:$dropwizard_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompile "io.dropwizard:dropwizard-testing:$dropwizard_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 compileKotlin {
