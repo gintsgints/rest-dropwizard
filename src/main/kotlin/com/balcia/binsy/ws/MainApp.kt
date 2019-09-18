@@ -15,6 +15,7 @@ class RestWSApp : Application<RestWSConfig>() {
     override fun run(configuration: RestWSConfig, env: Environment) {
         println("Running ${configuration.appName}!")
         env.jersey().register(RootResource(configuration.appName))
+        env.healthChecks().register("default", DefaultHealthCheck())
         val calculatorComponent = CalculatorComponent()
         env.jersey().register(calculatorComponent)
     }
