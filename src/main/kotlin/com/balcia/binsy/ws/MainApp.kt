@@ -1,6 +1,6 @@
 package com.balcia.binsy.ws
 
-import com.balcia.binsy.ws.calculator.CalculatorComponent
+import com.balcia.binsy.ws.resources.calculator.CalculatorComponent
 import io.dropwizard.Application
 import io.dropwizard.setup.Environment
 

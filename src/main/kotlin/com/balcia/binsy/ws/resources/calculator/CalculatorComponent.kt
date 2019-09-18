@@ -1,4 +1,4 @@
-package com.balcia.binsy.ws.calculator
+package com.balcia.binsy.ws.resources.calculator
 
 import javax.ws.rs.GET
 import javax.ws.rs.Path
