@@ -1,6 +1,8 @@
 # dropwizard.io REST project example
 
 REST example project based on https://www.dropwizard.io/ framework.
+Project is build using Open JDK version 1.8
+(JDK 11 will be supported with next dropwizard 2.x)
 
 ## Start project
 
@@ -19,11 +21,11 @@ http://localhost:8080/add?a=5&b=10
 Project contains docker instructions to build:
 
 ```bash
-docker build -t api .
+docker build -t registry.balcia.com/balcia_dev/java/rest-dropwizard .
 ```
 
 And run image after:
 
 ```bash
-docker run --rm -p 8080:8080 -p 8081:8081 -p 8443:8443 -v src/main/resources:/usr/local/app/config api
+docker-compose up -d
 ```

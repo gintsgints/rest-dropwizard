@@ -62,3 +62,7 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,gradle,kotlin
 
 .idea
+bin
+.classpath
+.project
+org.eclipse.buildship.core.prefs
