@@ -6,7 +6,23 @@ Project is build using Open JDK version 1.8
 
 ## Start project
 
-To start project execute gradle command:
+Before api start you have to start postgres database:
+
+```bash
+docker-compose up -d db
+```
+
+and with some DB tool create table (user: postgres, password: postgres_234):
+
+```postgresql
+create table adm_attachments
+(
+	id numeric(19),
+	path varchar(4000)
+);
+```
+
+Then, to start project, execute gradle command:
 
 ```bash
 ./gradlew run
