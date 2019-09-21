@@ -3,7 +3,7 @@ WORKDIR /usr/local/app
 
 COPY . .
 
-RUN ./gradlew clean build
+RUN ./gradlew clean build -x test
 
 FROM openjdk:8u222-jre-slim AS release
 WORKDIR /usr/local/app

@@ -1,5 +1,18 @@
 stages:
+  - test
   - build
+
+test:
+  stage: test
+  image: openjdk:8u222
+  variables:
+    POSTGRES_PASSWORD: "postgres_234"
+  services:
+    - postgres:postgres:9.6-alpine
+  script:
+    - ./gradlew test
+  except:
+    - tags
 
 build:
   stage: build
@@ -9,7 +22,6 @@ build:
     DOCKER_DRIVER: overlay2
     POSTGRES_PASSWORD: "postgres_234"
   services:
-    - postgres:postgres:9.6-alpine
     - docker:18.09-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
@@ -26,7 +38,6 @@ build:ver:
     DOCKER_DRIVER: overlay2
     POSTGRES_PASSWORD: "postgres_234"
   services:
-    - postgres:postgres:9.6-alpine
     - docker:18.09-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
