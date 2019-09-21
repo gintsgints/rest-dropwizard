@@ -15,16 +15,8 @@ test:
   except:
     - tags
   artifacts:
-    paths:
-      - build\reports\tests\test
-
-pages:
-  stage: publish
-  script:
-    - cp -ar build\reports\tests\test public
-  artifacts:
-    paths:
-      - public
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
 
 build:
   stage: build
