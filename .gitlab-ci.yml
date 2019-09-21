@@ -8,7 +8,7 @@ test:
   variables:
     POSTGRES_PASSWORD: "postgres_234"
   services:
-    - postgres:postgres:9.6-alpine
+    - postgres:9.6-alpine
   script:
     - ./gradlew test
   except:
