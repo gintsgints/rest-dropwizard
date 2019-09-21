@@ -1,5 +1,6 @@
 stages:
   - test
+  - publish
   - build
 
 test:
@@ -10,9 +11,21 @@ test:
   services:
     - postgres:9.6-alpine
   script:
+    - ping postgres
     - ./gradlew test
   except:
     - tags
+  artifacts:
+    paths:
+      - build\reports\tests\test
+
+pages:
+  stage: publish
+  script:
+    - cp -ar build\reports\tests\test public
+  artifacts:
+    paths:
+      - public
 
 build:
   stage: build
@@ -20,7 +33,6 @@ build:
   variables:
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_DRIVER: overlay2
-    POSTGRES_PASSWORD: "postgres_234"
   services:
     - docker:18.09-dind
   script:
@@ -36,7 +48,6 @@ build:ver:
   variables:
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_DRIVER: overlay2
-    POSTGRES_PASSWORD: "postgres_234"
   services:
     - docker:18.09-dind
   script:
