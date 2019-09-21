@@ -9,7 +9,7 @@ import io.dropwizard.Application
 import io.dropwizard.jdbi3.JdbiFactory
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
-import org.jdbi.v3.core.Jdbi
+import org.flywaydb.core.Flyway
 
 
 class RestWSApp : Application<RestWSConfig>() {
@@ -22,8 +22,16 @@ class RestWSApp : Application<RestWSConfig>() {
     }
 
     override fun run(configuration: RestWSConfig, env: Environment) {
-        println("Running ${configuration.appName}!")
+        Flyway.configure().dataSource(
+            configuration.dataSourceFactory.url,
+            configuration.dataSourceFactory.user,
+            configuration.dataSourceFactory.password
+        )
+            .encoding("UTF-8")
+            .load()
+            .migrate()
 
+        // Initialize JDBI
         val factory = JdbiFactory()
         val jdbi = factory.build(env, configuration.dataSourceFactory, "postgresql")
         jdbi.installPlugins()
