@@ -7,9 +7,10 @@ build:
   variables:
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_DRIVER: overlay2
+    POSTGRES_PASSWORD: "postgres_234"
   services:
-    - name: docker:18.09-dind
-      command: ["--insecure-registry=registry.balcia.com"]
+    - postgres:postgres:9.6-alpine
+    - docker:18.09-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY_IMAGE .
@@ -23,9 +24,10 @@ build:ver:
   variables:
     DOCKER_HOST: tcp://localhost:2375
     DOCKER_DRIVER: overlay2
+    POSTGRES_PASSWORD: "postgres_234"
   services:
-    - name: docker:18.09-dind
-      command: ["--insecure-registry=registry.balcia.com"]
+    - postgres:postgres:9.6-alpine
+    - docker:18.09-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker build -t $CI_REGISTRY_IMAGE:$CI_BUILD_TAG .
