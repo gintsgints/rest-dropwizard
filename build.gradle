@@ -37,6 +37,7 @@ dependencies {
     compile "org.jdbi:jdbi3-kotlin-sqlobject:3.3.0"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.9"
     compile "org.flywaydb:flyway-core:6.0.3"
+    implementation 'org.kodein.di:kodein-di-generic-jvm:6.4.1'
     testCompile "io.dropwizard:dropwizard-testing:$dropwizard_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

@@ -1,7 +1,9 @@
 package com.balcia.binsy.ws.resources.admatachment
 
 import io.dropwizard.jersey.params.IntParam
-import org.jdbi.v3.core.Jdbi
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.generic.instance
 import org.slf4j.LoggerFactory
 import javax.validation.Valid
 import javax.ws.rs.*
@@ -11,7 +13,8 @@ import javax.ws.rs.core.Response
 @Path("/attachment")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-class AdmAttachmentResource(private val dao: AdmAttachmentDAO) {
+class AdmAttachmentResource(override val kodein: Kodein): KodeinAware {
+    private val dao: AdmAttachmentDAO by kodein.instance()
     val logger = LoggerFactory.getLogger(AdmAttachmentResource::class.java)
 
     @GET

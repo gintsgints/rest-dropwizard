@@ -10,6 +10,9 @@ import io.dropwizard.jdbi3.JdbiFactory
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.flywaydb.core.Flyway
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 
 
 class RestWSApp : Application<RestWSConfig>() {
@@ -37,7 +40,11 @@ class RestWSApp : Application<RestWSConfig>() {
         jdbi.installPlugins()
         val dao = jdbi.onDemand(AdmAttachmentDAO::class.java)
 
-        env.jersey().register(AdmAttachmentResource(dao))
+        val kodein = Kodein {
+            bind<AdmAttachmentDAO>() with singleton { dao }
+        }
+
+        env.jersey().register(AdmAttachmentResource(kodein))
         env.jersey().register(RootResource(configuration.appName))
         env.healthChecks().register("default", DefaultHealthCheck())
         val calculatorComponent = CalculatorComponent()
