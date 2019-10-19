@@ -46,10 +46,11 @@ class RestWSApp : Application<RestWSConfig>() {
 
         val kodein = Kodein {
             bind<AdmAttachmentDAO>() with singleton { dao }
+            bind<RestWSConfig>() with singleton { configuration }
         }
 
         env.jersey().register(AdmAttachmentResource(kodein))
-        env.jersey().register(RootResource(configuration.appName))
+        env.jersey().register(RootResource(kodein))
         env.healthChecks().register("default", DefaultHealthCheck())
         val calculatorComponent = CalculatorComponent()
         env.jersey().register(calculatorComponent)
