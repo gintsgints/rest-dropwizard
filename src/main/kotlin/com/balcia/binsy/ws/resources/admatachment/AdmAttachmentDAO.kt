@@ -7,13 +7,13 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery
 import org.jdbi.v3.sqlobject.statement.SqlUpdate
 
 interface AdmAttachmentDAO : SqlObject {
-    @SqlUpdate("insert into ADM_ATTACHMENTS (id, path) values (:attachment.id, :attachment.path)")
+    @SqlUpdate("insert into ADM_ATTACHMENT (id, path) values (:attachment.id, :attachment.path)")
     @GetGeneratedKeys
     fun insert(attachment: AdmAttachment): Int
 
-    @SqlQuery("select id, path from ADM_ATTACHMENTS where id = :id")
+    @SqlQuery("select id, path from ADM_ATTACHMENT where id = :id")
     fun find(@Bind("id") id: Int): AdmAttachment?
 
-    @SqlQuery("select id, path from ADM_ATTACHMENTS")
+    @SqlQuery("select id, path from ADM_ATTACHMENT")
     fun findAll(): List<AdmAttachment>
 }

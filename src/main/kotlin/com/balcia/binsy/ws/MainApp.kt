@@ -29,7 +29,7 @@ class RestWSApp : Application<RestWSConfig>() {
     }
 
     override fun run(configuration: RestWSConfig, env: Environment) {
-        Flyway.configure().dataSource(
+        Flyway.configure().baselineOnMigrate(true).dataSource(
             configuration.dataSourceFactory.url,
             configuration.dataSourceFactory.user,
             configuration.dataSourceFactory.password
