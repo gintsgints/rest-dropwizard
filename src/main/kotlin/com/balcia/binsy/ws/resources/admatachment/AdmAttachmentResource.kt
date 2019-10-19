@@ -1,6 +1,8 @@
 package com.balcia.binsy.ws.resources.admatachment
 
 import io.dropwizard.jersey.params.IntParam
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
@@ -13,11 +15,13 @@ import javax.ws.rs.core.Response
 @Path("/attachment")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Api(description = "Attachment API")
 class AdmAttachmentResource(override val kodein: Kodein): KodeinAware {
     private val dao: AdmAttachmentDAO by kodein.instance()
     val logger = LoggerFactory.getLogger(AdmAttachmentResource::class.java)
 
     @GET
+    @ApiOperation("Returns list of all attachments")
     fun getAll(): Response {
         logger.info("Handling request to list providers")
         return Response.ok(dao.findAll()).build()

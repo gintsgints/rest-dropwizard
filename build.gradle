@@ -31,6 +31,7 @@ dependencies {
     compile "io.dropwizard:dropwizard-core:$dropwizard_version"
     compile "io.dropwizard:dropwizard-db:$dropwizard_version"
     compile "io.dropwizard:dropwizard-jdbi3:$dropwizard_version"
+    compile "com.smoketurner:dropwizard-swagger:1.3.5-3"
     compile "org.jdbi:jdbi3-sqlobject:$jdbi_version"
     compile "org.jdbi:jdbi3-postgres:$jdbi_version"
     compile "org.jdbi:jdbi3-kotlin:$jdbi_version"

@@ -9,10 +9,14 @@ import io.dropwizard.Application
 import io.dropwizard.jdbi3.JdbiFactory
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
+import io.federecio.dropwizard.swagger.SwaggerBundle
 import org.flywaydb.core.Flyway
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration
+
+
 
 
 class RestWSApp : Application<RestWSConfig>() {
@@ -53,6 +57,11 @@ class RestWSApp : Application<RestWSConfig>() {
 
     override fun initialize(bootstrap: Bootstrap<RestWSConfig>) {
         bootstrap.objectMapper.registerModule(KotlinModule())
+        bootstrap.addBundle(object : SwaggerBundle<RestWSConfig>() {
+            override fun getSwaggerBundleConfiguration(configuration: RestWSConfig): SwaggerBundleConfiguration? {
+                return configuration.swaggerBundleConfiguration
+            }
+        })
     }
 
 }

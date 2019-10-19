@@ -19,3 +19,6 @@ database:
   properties:
     charSet: UTF-8
   validationQuery: "SELECT 1"
+
+swagger:
+  resourcePackage: com.balcia.binsy.ws.resources
