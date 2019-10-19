@@ -12,16 +12,6 @@ Before api start you have to start postgres database:
 docker-compose up -d db
 ```
 
-Then, change database host to localhost at
-
-./src/main/resources/config.yml
-
-so it is like:
-
-```text
-url: jdbc:postgresql://localhost/postgres
-```
-
 and to start project, execute gradle command:
 
 ```bash
