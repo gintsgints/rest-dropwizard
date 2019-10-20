@@ -15,6 +15,10 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import io.dropwizard.jackson.Jackson
+
+
 
 
 
@@ -57,6 +61,7 @@ class RestWSApp : Application<RestWSConfig>() {
     }
 
     override fun initialize(bootstrap: Bootstrap<RestWSConfig>) {
+        bootstrap.objectMapper = Jackson.newMinimalObjectMapper().registerModule(Jdk8Module())
         bootstrap.objectMapper.registerModule(KotlinModule())
         bootstrap.addBundle(object : SwaggerBundle<RestWSConfig>() {
             override fun getSwaggerBundleConfiguration(configuration: RestWSConfig): SwaggerBundleConfiguration? {

@@ -42,6 +42,7 @@ dependencies {
     testCompile "io.dropwizard:dropwizard-testing:$dropwizard_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.9"
 }
 
 compileKotlin {
