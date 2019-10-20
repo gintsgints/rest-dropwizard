@@ -3,6 +3,8 @@ package com.balcia.binsy.ws
 import com.balcia.binsy.ws.resources.admatachment.AdmAttachmentDAO
 import com.balcia.binsy.ws.resources.admatachment.AdmAttachmentResource
 import com.balcia.binsy.ws.resources.calculator.CalculatorComponent
+import com.balcia.binsy.ws.resources.crmperson.CrmPersonDAO
+import com.balcia.binsy.ws.resources.crmperson.CrmPersonResource
 import com.balcia.binsy.ws.resources.root.RootResource
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.dropwizard.Application
@@ -40,16 +42,19 @@ class RestWSApp : Application<RestWSConfig>() {
 
         // Initialize JDBI
         val factory = JdbiFactory()
-        val jdbi = factory.build(env, configuration.dataSourceFactory, "postgresql")
+        val jdbi = factory.build(env, configuration.dataSourceFactory, "oracle")
         jdbi.installPlugins()
-        val dao = jdbi.onDemand(AdmAttachmentDAO::class.java)
+        val attachmentDAO = jdbi.onDemand(AdmAttachmentDAO::class.java)
+        val crmPersonDAO = jdbi.onDemand(CrmPersonDAO::class.java)
 
         val kodein = Kodein {
-            bind<AdmAttachmentDAO>() with singleton { dao }
+            bind<AdmAttachmentDAO>() with singleton { attachmentDAO }
+            bind<CrmPersonDAO>() with singleton { crmPersonDAO }
             bind<RestWSConfig>() with singleton { configuration }
         }
 
         env.jersey().register(AdmAttachmentResource(kodein))
+        env.jersey().register(CrmPersonResource(kodein))
         env.jersey().register(RootResource(kodein))
         env.healthChecks().register("default", DefaultHealthCheck())
         val calculatorComponent = CalculatorComponent()
